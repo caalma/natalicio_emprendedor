@@ -38,7 +38,7 @@ var dia = {
     '16': 'El pájaro alegre',
     '17': 'La pedorrera',
     '18': 'El sobaco peludo',
-    '19': 'La chupamatraca',
+    '19': 'La chupa-matraca',
     '20': 'La tengo tiesa',
     '21': 'Aquí se le hace',
     '22': 'La calentura',
