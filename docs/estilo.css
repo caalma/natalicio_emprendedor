@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Mate+SC&family=Staatliches&display=swap');
 
-* { 
-
-    font-family:'Mate SC', serif;
-}
+* {font-family:'Mate SC', serif; }
 body {
     padding:40px;
     margin:0;
