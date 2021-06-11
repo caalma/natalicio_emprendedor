@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        /* 
+            Si querés modificar los rubros, los nombres y los colores
+            podés hacerlo en el siguiente código:
+        */
+
+        var mes = {
+            '01': 'Comidas rápidas',
+            '02': 'Motel',
+            '03': 'Funeraria',
+            '04': 'Supermercado',
+            '05': 'Restaurantes',
+            '06': 'Sex Shop',
+            '07': 'Panadería',
+            '08': 'Billar',
+            '09': 'Carnicería',
+            '10': 'Peluquería',
+            '11': 'Discoteca',
+            '12': 'Farmacia'
+        }
+
+
+        var dia = {
+            '01': 'El pedo explosivo',
+            '02': 'La cuca loca',
+            '03': 'El verga sucia',
+            '04': 'La vaca muerta',
+            '05': 'El sobaco salvaje',
+            '06': 'El tripa seca',
+            '07': 'La arrechera',
+            '08': 'Por detrás es rico',
+            '09': 'La arepa peluda',
+            '10': 'El gargajo rico',
+            '11': 'Arrechera segura',
+            '12': 'Baje y chupe',
+            '13': 'Hueco rancio',
+            '14': 'El bagre sexy',
+            '15': 'Se le hace rico',
+            '16': 'El pájaro alegre',
+            '17': 'La pedorrera',
+            '18': 'El sobaco peludo',
+            '19': 'La chupamatraca',
+            '20': 'La tengo tiesa',
+            '21': 'Aquí se le hace',
+            '22': 'La calentura',
+            '23': 'La tengo buena',
+            '24': 'El rapidín',
+            '25': 'Chupe y lleve',
+            '26': 'El sube y baja',
+            '27': 'El culicontento',
+            '28': 'Aquí se la doy',
+            '29': 'Se lo muestro y le gusta',
+            '30': 'Venga y se lo hago',
+            '31': 'Tufo añejo',
+        }
+
+        /* los colores están expresados en hexadecimal */
+        let col = {
+            '0': ['b4b9f8', '2a170f', 'fa3d00'], 
+            '1': ['a0cee9', '101e0c', '25b506'],
+            '2': ['84f4f1', '1b1330', 'ff05be'],
+            '3': ['8dfdb4', '09190b', 'f05514'],
+            '4': ['b0e89b', '0c2422', '1661ee'],
+            '5': ['eaf489', '081c0f', '7406fe'],
+            '6': ['f6c799', '120d25', '00b444'],
+            '7': ['ffaaaa', '250f26', '0055ed'],
+            '8': ['fa9ddb', '111921', '508a00'],
+            '9': ['d1adff', '23190c', 'ed0004'],
+
+        }
+
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta http-equiv="cleartype" content="on"/>
+
+    <title>Natalicio EMPRENDEDOR</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Mate+SC&family=Staatliches&display=swap');
+
+        * { 
+
+            font-family: 'Mate SC', serif;
+ }
+        body {
+            padding:40px;
+            margin:0;
+            text-align:center;
+            background:#ddd;
+        }
+        label {
+            display:block;
+            font-size:2em;
+            color:#333;
+        }
+        input[type=date] {
+            font-size:1.5em;
+            color:#333;
+            padding:5px;
+            border-radius:7px;
+            border:1px solid #666;
+        }
+        em { color:#222; }
+        section {
+            text-align:center;
+            display:none;
+            padding:20px;
+            margin:40px;
+            box-shadow: 0 0 50px 15px rgb(255 255 255 / 50%);
+            border:5px solid #222;
+        }
+        section.activo { display:block; }
+        h2 {
+            font-size:2.4em;
+            margin:0;
+            padding:0;
+            font-family: 'Staatliches', cursive;
+        }
+        h1 {
+            font-size:3.5em;
+            margin:0;
+            padding:0;
+            text-shadow: 4px 3px 3px rgba(0,0,0,.6);
+            -webkit-text-stroke: 1px rgba(255,255,255,.9);
+            font-family: 'Anton', sans-serif;   
+            letter-spacing:3px;
+        }
+
+    </style>
+</head>
+    <header>
+        <div>
+            <label>Te recomiendo<br>el nombre de <em>tu próximo emprendimiento</em><br>si me indicás tu <b>fecha nacimiento</b>:</label>
+            <input type="date" id="natalicio" onchange="combinar()" onclick="limpiar()">
+        </div>
+    </header>
+    <section id="cartel">
+        <h2 id="empresa"></h2>
+        <h1 id="nombre"></h1>
+    </section>
+<body>
+    <script type="text/javascript">
+        var empresa = document.getElementById('empresa');
+        var nombre = document.getElementById('nombre');
+        var natalicio = document.getElementById('natalicio');
+        var cartel = document.getElementById('cartel');
+
+        function grp(t){
+            let s = 0
+            let d = t.split('');
+            for(let i in d){
+                s += parseInt(d[i]);
+            }
+            let st = s.toString()
+            if(st.length > 1){
+                s = grp(st);
+            }
+            return s.toString();
+        }
+
+        function limpiar(){
+            empresa.innerHTML = '';
+            nombre.innerHTML = '';
+            cartel.className = '';
+        }
+
+        function estilizar(t){
+            es = col[grp(t)];
+            cartel.style.backgroundColor = '#'+es[0];
+            empresa.style.color = '#'+es[1];
+            nombre.style.color = '#'+es[2];
+        }
+
+        function combinar(){
+            let v = natalicio.value.split('-');
+            limpiar();
+            if(v != "") {
+                empresa.innerHTML = mes[v[1]];
+                nombre.innerHTML = dia[v[2]];
+                cartel.className = 'activo';
+                estilizar(v.join(''));
+            }
+        }
+    </script>
+</body>
+</html>
