@@ -1,7 +1,4 @@
-var empresa = document.getElementById('empresa');
-var nombre = document.getElementById('nombre');
-var natalicio = document.getElementById('natalicio');
-var cartel = document.getElementById('cartel');
+var empresa, nombre, natalicio, cartel;
 
 function grp(t){
     let s = 0
@@ -29,13 +26,67 @@ function estilizar(t){
     nombre.style.color = '#'+es[2];
 }
 
+function asignar_url(v){
+    document.location.hash = v;
+}
+
+function cargar_url(){
+    let url = new URL(document.URL);
+    let hash = url.hash.replace('#','');
+    if(hash !== ''){
+        natalicio.value = hash;  
+        natalicio.onchange();      
+    }
+}
+
 function combinar(){
-    let v = natalicio.value.split('-');
-    limpiar();
-    if(v != "") {
-        empresa.innerHTML = mes[v[1]];
-        nombre.innerHTML = dia[v[2]];
+    let v = natalicio.value;
+    let d = v.split('-');
+    asignar_url(v);
+    
+    if(d != "") {
+        empresa.innerHTML = mes[d[1]];
+        nombre.innerHTML = dia[d[2]];
         cartel.className = 'activo';
-        estilizar(v.join(''));
+        estilizar(d.join(''));
+    }
+}
+
+function animar_entrada(){
+    let b = document.getElementsByTagName('body')[0];
+    b.className = 'mostrar';
+    b.style.opacity = 1;
+}
+
+function iniciar(ev){
+    empresa = document.getElementById('empresa');
+    nombre = document.getElementById('nombre');
+    natalicio = document.getElementById('natalicio');
+    cartel = document.getElementById('cartel');
+ 
+    natalicio.onchange = combinar;
+    natalicio.onclick = limpiar;
+
+    cargar_url();
+    animar_entrada();
+}
+
+
+
+
+
+
+if(window.attachEvent) {
+    window.attachEvent('onload', iniciar);
+} else {
+    if(window.onload) {
+        var curronload = window.onload;
+        var newonload = function(evt) {
+            curronload(evt);
+            iniciar(evt);
+        };
+        window.onload = newonload;
+    } else {
+        window.onload = iniciar;
     }
 }
